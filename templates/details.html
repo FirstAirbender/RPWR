@@ -1,0 +1,251 @@
+{% extends 'skin.html' %}
+{% block top-header %}
+{% include 'sidebar.html' %}
+<li class="page-scroll">
+	<a href="/edit/{{form.id}}" title = 'Edit this form'>
+		<i class="fa fa-edit fa-fw"></i>
+		Edit this form
+	</a>
+</li>
+{% endblock %}
+{% block content %}
+
+<div id = 'thetable' style = "" class = 'col-md-8 col-md-offset-2'>
+	<table id = "test2" class = "table  table-boarder table-hover table-striped" style = 'background-color:white;'>
+		<tr>
+			<th colspan = "2">
+				<center>
+					<h3>
+						Research Personal Workspace Registry
+					</h3>
+				</center>
+			</th>
+		</tr>
+	
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%' >
+					Index
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.Index}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					Building
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.Building_option}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					Room
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.Room}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					Desk
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.Desk}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					Extention
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.Extention}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					Student ID
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.UWID}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					Email
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.Email}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					Last Name
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.Last_Name}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					First Name
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.First_Name}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					Status
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.Status}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					First Supervisor
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.First_Supervisor}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					Second Supervisor
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.Second_Supervisor}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					Third Supervisor
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.Third_Supervisor}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					Start Date
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.Start_Date}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					End Date
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.End_Date}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					FOB
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.FOB}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					FOB p/u
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.FOB_pu}}
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<center style = 'text-align:left; margin-left: 50%'>
+					Added to existing FOB
+				</center>
+			</th>
+			<td>
+				<center style = 'text-align:left; margin-left: 30%'>
+					{{form.Added_to_existing_FOB}}
+				</center>
+			</td>
+		</tr>
+{% endblock %}
+
+{% block script %}
+	<script type="text/javascript">
+		$('.datepicker').datepicker({
+			// format: "mm-yyyy",
+			// viewMode: "months", 
+			// minViewMode: "months"
+		})
+	</script>
+{% endblock %}

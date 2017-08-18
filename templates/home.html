@@ -1,0 +1,171 @@
+{% extends 'skin.html' %}
+{% block top-header %}
+{% include 'sidebar.html' %}
+{% endblock %}
+
+
+{% block style %}
+	<style type="text/css">
+		.panel-heading a:after {
+		    font-family:'Glyphicons Halflings';
+		    content:"\e114";
+		    float: right;
+		    color: grey;
+		}
+		.panel-heading a.collapsed:after {
+			content:"\e080";
+		}
+        thead input {
+		    width: 100%;
+		    height: 100%;
+		    box-sizing: border-box;
+		}
+		tr.highlight {
+    background-color: whitesmoke !important;
+		}
+	</style>
+{% endblock %}
+
+
+
+{% block content %}
+	<div id="homepage_main_div" class="" style="margin: 10px; margin-right:50px; margin-left:50px;">
+		<center>
+			<h3>
+				Research Personal Worksplace Registry
+			</h3>
+		</center>
+		<div class="panel-group" id="room_panels">
+		</div>
+	</div>
+{% endblock %}
+
+
+{% block script %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var buildinglist = {{building_list|safe}}
+			for( x in buildinglist ){
+				var tmplmarkup = $('#item-template').html();
+				var compiledtmpl = tmplmarkup.replace(/__prefix__/g, buildinglist[x]);		
+				$('div#room_panels').append(compiledtmpl)
+				get_data(buildinglist[x])
+
+			}
+
+			$('div#homepage_Areatable'+buildinglist[0]).addClass('in')
+			$('#a_collapse_click'+buildinglist[0]).removeClass('collapsed')
+
+			$('#room_panels').on('shown', function () {
+				$(".fa-plus-circle").removeClass("fa-plus-circle").addClass("fa-minus-circle");
+			});
+
+			$('#room_panels').on('hidden', function () {
+				$(".icon-chevron-up").removeClass("icon-chevron-up").addClass("icon-chevron-down");
+			});
+
+			function get_data(building_name){
+				$('#homepage_table'+building_name).DataTable();
+				var table = $('#homepage_table'+building_name).DataTable();
+					$.ajax({
+						url: "/api/Information/?format=json&limit=0&Building__icontains="+building_name,
+						async: false,
+						success: function(data){
+							var rows = []
+							for(i in data.objects){
+								var row = data.objects[i]
+								rows.push([
+									'<a href="/details/'+row.id+'">'+row.Room+'</a>',
+									row.Desk,
+									row.UWID,
+									row.Last_Name,
+									row.First_Name,
+									row.Status,
+									row.First_Supervisor,
+									'<a style="color:#333;" href="/edit/'+row.id+'"> <i class="fa fa-edit"></i></a>',
+								])
+							}
+							var t = $('#homepage_table'+building_name).DataTable();
+							t.rows.add(rows).draw().nodes().to$().addClass(building_name);
+
+							// $('#homepage_table'+building_name).on('click', 'tr', function(){
+							// 		var d = table.row(this).data();
+							// 		window.open('/details/'+d[7])
+							// });
+							// $('#homepage_table'+building_name+' tbody').on('mouseenter', 'tr', function(){
+							// 	$(this).css('cursor','pointer')
+							// });
+							$('#homepage_table'+building_name+' .head th').each( function (index) {
+								var title = $(this).text();
+								$(this).html( '<input class="form-control" style = "width: 100%;" type="text" id ="searchbar'+building_name+index+'" placeholder="Search '+title+'" />' );
+							} );
+
+							table.columns().eq(0).each(function( colIDx ){
+								var that = this;
+								$('#searchbar'+building_name+colIDx).on('keyup change', function(){
+										table
+											.column(colIDx)
+											.search(this.value)
+											.draw();
+								});
+							});
+						}
+					});
+				}
+		});
+	</script>
+	
+	<script type="text/html" id="item-template">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+					__prefix__
+						<a data-toggle="collapse" data-target="#homepage_Areatable__prefix__" href="#homepage_Areatable__prefix__"  data-parent="#room_panels" class="collapsed" id="a_collapse_click__prefix__">
+						</a>
+					</h4>
+				</div>
+				<div id="homepage_Areatable__prefix__" class="panel-collapse collapse">
+					<div class="panel-body">
+						<table id="homepage_table__prefix__" class="table col-lg-8 table-boarded table-responsive hover" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th>Room</th>
+									<th>Desk</th>
+									<th>Student ID</th>
+									<th>Last Name</th>
+									<th>First Name</th>
+									<th>Status</th>
+									<th>Supervisor</th>
+									<th style="width:10px;"></th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th>Room</th>
+									<th>Desk</th>
+									<th>Student ID</th>
+									<th>Last Name</th>
+									<th>First Name</th>
+									<th>Status</th>
+									<th>Supervisor</th>
+									<th style="width:10px;"></th>
+								</tr>
+							</tfoot>
+
+							<thead id="homepage_search__prefix__" class='head'>
+								<tr>
+									<th class="search">Room</th>
+									<th class="search">Desk</th>
+									<th class="search">Student ID</th>
+									<th class="search">Last Name</th>
+									<th class="search">First Name</th>
+									<th class="search">Status</th>
+									<th class="search">Supervisor</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+	</script>
+{% endblock %}
